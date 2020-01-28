@@ -15,7 +15,7 @@ import Rectangle from "../../system/rectangle";
 import gravity from "../../system/gravity";
 import scrollParent from "../../system/scroll-parent";
 
-import $ from "jquery";
+import jQuery from "jquery";
 import integrates from "../../computed/integrates";
 import classify from "../../computed/classify";
 
@@ -279,13 +279,13 @@ export default Component.extend({
   },
 
   getStaticParentOffset(element) {
-    let $element = $(element);
+    let $element = jQuery(element);
     let $checkElements = $element.add($element.parents());
     let staticElement;
     $checkElements.each(function() {
       if (
-        $(this).css("position") === "static" &&
-        ($(this).offset().top > 0 || $(this).offset().left > 0)
+        jQuery(this).css("position") === "static" &&
+        (jQuery(this).offset().top > 0 || jQuery(this).offset().left > 0)
       ) {
         staticElement = this;
         return false;
@@ -391,7 +391,7 @@ export default Component.extend({
     let staticElement = this.getStaticParentOffset(target.element);
     let staticOffset = { top: 0, left: 0 };
     if (staticElement) {
-      staticOffset = $(staticElement).offset();
+      staticOffset = jQuery(staticElement).offset();
     }
 
     if (get(this, "supportsLiquidFire")) {
