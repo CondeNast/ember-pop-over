@@ -15,7 +15,7 @@ import Rectangle from "../../system/rectangle";
 import gravity from "../../system/gravity";
 import scrollParent from "../../system/scroll-parent";
 
-import jQuery from "jquery";
+import $ from "jquery";
 import integrates from "../../computed/integrates";
 import classify from "../../computed/classify";
 
