@@ -391,7 +391,7 @@ export default Component.extend({
     let staticElement = this.getStaticParentOffset(target.element);
     let staticOffset = { top: 0, left: 0 };
     if (staticElement) {
-      staticOffset = jQuery(staticElement).offset();
+      staticOffset = Rectangle.ofElement(staticElement);
     }
 
     if (get(this, "supportsLiquidFire")) {
