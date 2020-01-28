@@ -278,22 +278,20 @@ export default Component.extend({
     }
   },
 
-  getStaticParentOffset(element) {
-    let $element = $(element);
-    let $checkElements = $element.add($element.parents());
-    let staticElement;
-    $checkElements.each(function () {
-      if ($(this).css('position') === 'static'
-        && (
-          $(this).offset().top > 0
-          || $(this).offset().left > 0
-        )
-      ) {
-        staticElement = this;
-        return false;
+  getStaticParentOffset(element) {
+    let $element = $(element);
+    let $checkElements = $element.add($element.parents());
+    let staticElement;
+    $checkElements.each(function() {
+      if (
+        $(this).css("position") === "static" &&
+        ($(this).offset().top > 0 || $(this).offset().left > 0)
+      ) {
+        staticElement = this;
+        return false;
       }
     });
-    return staticElement;
+    return staticElement;
   },
 
   tile() {
@@ -390,10 +388,10 @@ export default Component.extend({
       targetRect.translateX(-1 * $boundingElement.scrollLeft());
     }
 
-    let staticElement = this.getStaticParentOffset(target.element);
-    let staticOffset = { top: 0, left: 0 };
-    if (staticElement) {
-      staticOffset = $(staticElement).offset();
+    let staticElement = this.getStaticParentOffset(target.element);
+    let staticOffset = { top: 0, left: 0 };
+    if (staticElement) {
+      staticOffset = $(staticElement).offset();
     }
 
     if (get(this, "supportsLiquidFire")) {
@@ -404,8 +402,8 @@ export default Component.extend({
       });
 
       $popover.css({
-        top: (popOverRect.top - targetRect.top - staticOffset.top) + 'px',
-        left: (popOverRect.left - targetRect.left - staticOffset.left) + 'px',
+        top: popOverRect.top - targetRect.top - staticOffset.top + "px",
+        left: popOverRect.left - targetRect.left - staticOffset.left + "px",
         width: popOverRect.width + "px",
         height: popOverRect.height + "px"
       });
