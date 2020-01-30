@@ -285,7 +285,7 @@ export default Component.extend({
     $checkElements.each(function() {
       if (
         jQuery(this).css("position") === "static" &&
-        (jQuery(this).offset().top > 0 || jQuery(this).offset().left > 0)
+        (jQuery(this).offset().top > 0 && jQuery(this).offset().left > 0)
       ) {
         staticElement = this;
         return false;
