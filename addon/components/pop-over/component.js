@@ -278,6 +278,22 @@ export default Component.extend({
     }
   },
 
+  getStaticParentOffset(element) {
+    let $element = jQuery(element);
+    let $checkElements = $element.add($element.parents());
+    let staticElement;
+    $checkElements.each(function() {
+      if (
+        jQuery(this).css("position") === "static" &&
+        (jQuery(this).offset().top > 0 || jQuery(this).offset().left > 0)
+      ) {
+        staticElement = this;
+        return false;
+      }
+    });
+    return staticElement;
+  },
+
   tile() {
     let target = get(this, "activeTarget") || {
       element: jQuery("#" + get(this, "for"))[0]
@@ -372,6 +388,12 @@ export default Component.extend({
       targetRect.translateX(-1 * $boundingElement.scrollLeft());
     }
 
+    let staticElement = this.getStaticParentOffset(target.element);
+    let staticOffset = { top: 0, left: 0 };
+    if (staticElement) {
+      staticOffset = Rectangle.ofElement(staticElement);
+    }
+
     if (get(this, "supportsLiquidFire")) {
       // Position the container over the target
       $element.find("> .liquid-container").css({
@@ -380,8 +402,8 @@ export default Component.extend({
       });
 
       $popover.css({
-        top: popOverRect.top - targetRect.top + "px",
-        left: popOverRect.left - targetRect.left + "px",
+        top: popOverRect.top - targetRect.top - staticOffset.top + "px",
+        left: popOverRect.left - targetRect.left - staticOffset.left + "px",
         width: popOverRect.width + "px",
         height: popOverRect.height + "px"
       });
